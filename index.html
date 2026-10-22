@@ -1,0 +1,601 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nursing Terms</title>
+<meta name="description" content="Nursing terminology reference, flashcards and NUR4508 practice tests.">
+<meta name="theme-color" content="#0B7A6B">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Nursing">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: one narrow column like an observation chart. Header with tabs, then Reference, Flashcards or Quiz. */
+:root {
+  --bg: #EBF0F2;
+  --surface: #FFFFFF;
+  --ink: #102A33;
+  --muted: #52666F;
+  --line: #CBD6DB;
+  --accent: #0B7A6B;
+  --accent-ink: #FFFFFF;
+  --tint: #DCEBE8;
+  --good: #1B7F4B;
+  --good-bg: #DDF0E5;
+  --bad: #B3392F;
+  --bad-bg: #F6E0DD;
+  --font-display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-data: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0C1A20; --surface: #142830; --ink: #E4EEF0; --muted: #93A8AF; --line: #27424C;
+    --accent: #4CC2AE; --accent-ink: #06211C; --tint: #173A38;
+    --good: #5FCB8E; --good-bg: #153326; --bad: #F08A7E; --bad-bg: #3A1D1A;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0C1A20; --surface: #142830; --ink: #E4EEF0; --muted: #93A8AF; --line: #27424C;
+  --accent: #4CC2AE; --accent-ink: #06211C; --tint: #173A38;
+  --good: #5FCB8E; --good-bg: #153326; --bad: #F08A7E; --bad-bg: #3A1D1A;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--font-body); font-size: 16px; line-height: 1.55;
+  padding-block: 28px 56px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; }
+header { display: flex; flex-direction: column; gap: 6px; }
+.eyebrow { font-family: var(--font-data); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+h1 { font-family: var(--font-display); font-weight: 700; font-size: clamp(34px, 7vw, 52px); line-height: 1.05; margin: 0; letter-spacing: -.01em; text-wrap: balance; }
+.lede { margin: 4px 0 0; color: var(--muted); max-width: 52ch; }
+nav { display: flex; gap: 4px; border-bottom: 2px solid var(--line); overflow-x: auto; }
+nav a {
+  font-family: var(--font-display); font-weight: 600; font-size: 17px; text-decoration: none; color: var(--muted);
+  padding: 10px 16px 9px; margin-bottom: -2px; white-space: nowrap; border-bottom: 3px solid transparent;
+}
+nav a:hover { color: var(--ink); }
+nav a[aria-current="page"] { color: var(--ink); border-bottom-color: var(--accent); }
+a:focus-visible, button:focus-visible, .card:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+h2 { font-family: var(--font-display); font-weight: 700; font-size: 22px; margin: 0; }
+section[hidden] { display: none; }
+
+/* Reference */
+.parts { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; margin: 12px 0 0; padding: 0; list-style: none; }
+.parts li { background: var(--tint); border-radius: 6px; padding: 8px 12px; display: flex; flex-direction: column; min-width: 0; }
+.parts b { font-family: var(--font-data); font-weight: 500; font-size: 15px; color: var(--accent); }
+.parts span { font-size: 14px; color: var(--ink); }
+.group { display: flex; flex-direction: column; gap: 4px; }
+.group h2 { padding-bottom: 6px; border-bottom: 2px solid var(--ink); }
+.row { display: grid; grid-template-columns: minmax(130px, 200px) 1fr; gap: 4px 20px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.row dt { font-family: var(--font-display); font-weight: 700; font-size: 18px; min-width: 0; overflow-wrap: anywhere; }
+.row dd { margin: 0; min-width: 0; }
+.row dd strong { font-weight: 600; }
+.row dd span { display: block; color: var(--muted); font-size: 15px; margin-top: 2px; }
+@media (max-width: 520px) { .row { grid-template-columns: 1fr; } }
+
+/* Flashcards */
+.tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+.count { font-family: var(--font-data); font-size: 14px; color: var(--muted); }
+.btn {
+  font: inherit; font-weight: 600; font-size: 15px; cursor: pointer; border-radius: 8px;
+  border: 1.5px solid var(--line); background: var(--surface); color: var(--ink); padding: 9px 16px;
+}
+.btn:hover { border-color: var(--accent); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.btn.again { color: var(--bad); }
+.btn.got { color: var(--good); }
+.btn:disabled { opacity: .45; cursor: default; }
+.btn-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.scene { perspective: 1200px; }
+.card {
+  position: relative; width: 100%; min-height: 280px; cursor: pointer; border: 0; padding: 0; background: none;
+  transform-style: preserve-3d; transition: transform .5s; font: inherit; color: inherit; text-align: left;
+}
+.card.flipped { transform: rotateY(180deg); }
+.face {
+  position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; padding: 24px;
+  display: flex; flex-direction: column; justify-content: center; gap: 10px; overflow-y: auto;
+}
+.face.back { transform: rotateY(180deg); border-color: var(--accent); }
+.face .tag { font-family: var(--font-data); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.face .term { font-family: var(--font-display); font-weight: 700; font-size: clamp(30px, 7vw, 46px); line-height: 1.1; overflow-wrap: anywhere; text-wrap: balance; }
+.face .ans { font-family: var(--font-display); font-weight: 600; font-size: clamp(22px, 5vw, 30px); line-height: 1.2; color: var(--accent); }
+.face .note { color: var(--muted); font-size: 16px; }
+.hint { font-size: 13px; color: var(--muted); }
+@media (max-width: 520px) { .card { min-height: 340px; } }
+@media (prefers-reduced-motion: reduce) { .card { transition: none; } }
+
+/* Quiz */
+.panel { background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 16px; }
+.q { font-family: var(--font-display); font-weight: 700; font-size: clamp(24px, 5vw, 32px); line-height: 1.15; margin: 0; overflow-wrap: anywhere; }
+.opts { display: flex; flex-direction: column; gap: 8px; }
+.opt {
+  font: inherit; text-align: left; cursor: pointer; border-radius: 8px; border: 1.5px solid var(--line);
+  background: var(--bg); color: var(--ink); padding: 12px 14px; display: flex; gap: 12px; align-items: baseline;
+}
+.opt:hover:not(:disabled) { border-color: var(--accent); }
+.opt .k { font-family: var(--font-data); color: var(--muted); }
+.opt.right { border-color: var(--good); background: var(--good-bg); }
+.opt.wrong { border-color: var(--bad); background: var(--bad-bg); }
+.opt:disabled { cursor: default; color: var(--ink); }
+.explain { border-left: 4px solid var(--accent); padding: 4px 0 4px 14px; color: var(--ink); }
+.bar { height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; }
+.bar i { display: block; height: 100%; background: var(--accent); transition: width .3s; }
+.score { font-family: var(--font-display); font-weight: 700; font-size: clamp(48px, 12vw, 80px); line-height: 1; margin: 0; font-variant-numeric: tabular-nums; }
+.missed { margin: 0; padding-left: 20px; }
+
+/* Module tests */
+.mt-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+.mt-tab { flex: 1 1 110px; font: inherit; color: var(--ink); background: var(--surface); border: 1.5px solid var(--line); border-radius: 8px; padding: 8px 12px; cursor: pointer; text-align: left; display: flex; flex-direction: column; gap: 2px; }
+.mt-tab b { font-family: var(--font-display); font-size: 16px; font-weight: 700; }
+.mt-tab span { font-family: var(--font-data); font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.mt-tab:hover { border-color: var(--accent); }
+.mt-tab[aria-pressed="true"] { border-color: var(--accent); background: var(--tint); box-shadow: inset 0 -3px 0 var(--accent); }
+.mt-tab:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.mt-head { display: flex; flex-direction: column; gap: 8px; }
+.mt-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.mt-score { font-family: var(--font-display); font-size: 24px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.mt-score small { font-family: var(--font-data); font-size: 12px; color: var(--muted); font-weight: 500; margin-left: 8px; }
+.mt-track { position: relative; height: 8px; background: var(--line); border-radius: 4px; overflow: hidden; }
+.mt-fill { position: absolute; inset: 0 auto 0 0; background: var(--accent); width: 0; transition: width .25s ease; }
+.mt-pass { position: absolute; top: 0; bottom: 0; left: 40%; width: 2px; background: var(--ink); opacity: .6; }
+.mt-list { display: flex; flex-direction: column; gap: 14px; }
+.mt-q { background: var(--surface); border: 1.5px solid var(--line); border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.mt-qn { font-family: var(--font-data); font-size: 12px; color: var(--muted); letter-spacing: .04em; }
+.mt-qp { margin: 0; font-weight: 500; font-size: 17px; text-wrap: pretty; }
+.mt-res h2 { margin: 0 0 4px; }
+.mt-res p { margin: 0; color: var(--muted); }
+@media (prefers-reduced-motion: reduce) { .mt-fill { transition: none; } }
+
+/* App shell */
+html { -webkit-text-size-adjust: 100%; }
+body { padding-top: calc(28px + env(safe-area-inset-top, 0px)); padding-bottom: calc(56px + env(safe-area-inset-bottom, 0px)); -webkit-tap-highlight-color: transparent; }
+.card, .btn, .opt, nav a, .mt-tab { touch-action: manipulation; }
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Study set · <span id="n">16</span> terms · 140 module questions</div>
+    <h1>Nursing Terms</h1>
+    <p class="lede">Basic clinical vocabulary with a reference sheet, flashcards and a quiz, plus seven NUR4508 practice tests. Values quoted are adult ranges. Children's ranges change with age, so use the age-banded chart on placement.</p>
+  </header>
+
+  <nav aria-label="Study modes">
+    <a href="#reference" data-tab="reference">Reference</a>
+    <a href="#flashcards" data-tab="flashcards">Flashcards</a>
+    <a href="#quiz" data-tab="quiz">Quiz</a>
+    <a href="#tests" data-tab="tests">Module tests</a>
+  </nav>
+
+  <section id="reference" hidden>
+    <div>
+      <h2>Word parts</h2>
+      <ul class="parts">
+        <li><b>tachy-</b><span>fast</span></li>
+        <li><b>brady-</b><span>slow</span></li>
+        <li><b>hypo-</b><span>below, low</span></li>
+        <li><b>hyper-</b><span>above, high</span></li>
+        <li><b>dys-</b><span>difficult, abnormal</span></li>
+        <li><b>a- / an-</b><span>without</span></li>
+        <li><b>-pnoea</b><span>breathing</span></li>
+        <li><b>-aemia</b><span>in the blood</span></li>
+        <li><b>-uria</b><span>urine</span></li>
+        <li><b>cyan-</b><span>blue</span></li>
+      </ul>
+    </div>
+    <div id="groups" style="display:flex;flex-direction:column;gap:28px;margin-top:28px"></div>
+  </section>
+
+  <section id="flashcards" hidden>
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div class="tools">
+        <span class="count" id="fc-count"></span>
+        <div class="btn-row">
+          <button class="btn" id="fc-shuffle" type="button">Shuffle</button>
+          <button class="btn" id="fc-review" type="button">Review missed</button>
+          <button class="btn" id="fc-reset" type="button">Reset</button>
+        </div>
+      </div>
+      <div class="scene">
+        <button class="card" id="card" type="button" aria-label="Flashcard. Press to flip.">
+          <div class="face front"><span class="tag">Term</span><span class="term" id="fc-term"></span><span class="hint">Tap to reveal</span></div>
+          <div class="face back"><span class="tag">Meaning</span><span class="ans" id="fc-ans"></span><span class="note" id="fc-note"></span></div>
+        </button>
+      </div>
+      <div class="tools">
+        <div class="btn-row">
+          <button class="btn" id="fc-prev" type="button">Back</button>
+          <button class="btn" id="fc-next" type="button">Next</button>
+        </div>
+        <div class="btn-row">
+          <button class="btn again" id="fc-again" type="button">Missed it</button>
+          <button class="btn got" id="fc-got" type="button">Got it</button>
+        </div>
+      </div>
+      <p class="hint" style="margin:0">Keys: space flips, arrow keys move.</p>
+    </div>
+  </section>
+
+  <section id="quiz" hidden>
+    <div class="panel" id="quiz-panel"></div>
+  </section>
+
+  <section id="tests" hidden>
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <p class="lede" style="margin:0">NUR4508-B Understanding People and Health. Seven 20-question multiple-choice tests: five on the module syllabus, then one each for the pathogenesis and immune system lectures. Tap an answer to see the correct one and a short explanation. The exam pass mark is 40%.</p>
+      <div class="mt-tabs" id="mt-tabs"></div>
+      <div class="mt-head" aria-live="polite">
+        <div class="mt-top"><div class="mt-score" id="mt-score"></div><button class="btn" id="mt-reset" type="button">Reset this test</button></div>
+        <div class="mt-track"><div class="mt-fill" id="mt-fill"></div><div class="mt-pass" title="40% pass mark"></div></div>
+        <div class="count">Marker shows the 40% pass mark</div>
+      </div>
+      <div class="mt-list" id="mt-list"></div>
+      <div id="mt-result"></div>
+    </div>
+  </section>
+</div>
+
+<script>
+var GROUPS = ["Heart and blood pressure", "Breathing and oxygen", "Temperature", "Glucose, fluid and urine", "Assessment"];
+var T = [
+  { g: 0, t: "Tachycardia", a: "Abnormally fast heart rate", d: ["Abnormally slow heart rate", "Irregular heart rhythm", "Absent heartbeat"], n: "Resting rate above 100 bpm in adults. Children's normal rates are higher and vary by age." },
+  { g: 0, t: "Bradycardia", a: "Abnormally slow heart rate", d: ["Abnormally fast heart rate", "Chest pain", "Fluttering heartbeat"], n: "Resting rate below 60 bpm in adults. Brady = slow, tachy = fast." },
+  { g: 0, t: "Hypotension", a: "Low blood pressure", d: ["High blood pressure", "Low blood sugar", "Low body temperature"], n: "Can cause dizziness, fainting and poor perfusion of organs." },
+  { g: 0, t: "Hypertension", a: "High blood pressure", d: ["Low blood pressure", "High heart rate", "High temperature"], n: "Persistently raised blood pressure." },
+  { g: 1, t: "Tachypnoea", a: "Fast breathing rate", d: ["Slow breathing rate", "Difficulty breathing", "Absence of breathing"], n: "Over 20 breaths/min in adults. An early warning sign of deterioration." },
+  { g: 1, t: "Bradypnoea", a: "Slow breathing rate", d: ["Fast breathing rate", "Noisy breathing", "Shallow breathing"], n: "Under 12 breaths/min in adults. Can follow opioid use or raised intracranial pressure." },
+  { g: 1, t: "Dyspnoea", a: "Difficult or laboured breathing, breathlessness", d: ["Absence of breathing", "Coughing up blood", "Fast heart rate"], n: "Patients often say they feel short of breath." },
+  { g: 1, t: "Apnoea", a: "Absence of breathing, temporary or permanent", d: ["Rapid breathing", "Wheezy breathing", "Deep breathing"], n: "Seen in sleep apnoea and in apnoeic episodes in premature babies." },
+  { g: 1, t: "Hypoxia vs hypoxaemia", a: "Hypoxia: low oxygen in tissues. Hypoxaemia: low oxygen in the blood", d: ["Hypoxia: high oxygen. Hypoxaemia: low oxygen", "They mean exactly the same thing", "Hypoxia: low carbon dioxide. Hypoxaemia: high carbon dioxide"], n: "Hypoxaemia often shows as a low SpO2. In practice the two terms are often used interchangeably." },
+  { g: 1, t: "Cyanosis", a: "Bluish colour of skin or lips from low oxygenation", d: ["Yellowing of the skin", "Abnormal paleness", "Redness of the skin"], n: "Central cyanosis (lips, tongue) is more serious than peripheral cyanosis (fingers, toes)." },
+  { g: 2, t: "Pyrexia (febrile)", a: "Raised body temperature, fever", d: ["Low body temperature", "Normal temperature", "Chills only"], n: "Afebrile means no fever. Normal adult temperature is about 36.1 to 37.2°C." },
+  { g: 2, t: "Hypothermia", a: "Dangerously low body temperature, below 35°C", d: ["Dangerously high body temperature", "Cold hands and feet only", "Fever with shivering"], n: "Babies and young children lose heat quickly, so it matters a great deal in paediatric care." },
+  { g: 3, t: "Hypoglycaemia vs hyperglycaemia", a: "Hypo: low blood glucose. Hyper: high blood glucose", d: ["Hypo: high blood glucose. Hyper: low blood glucose", "Hypo: low blood pressure. Hyper: high blood pressure", "Both mean raised blood glucose"], n: "A hypo needs prompt treatment, especially in people with diabetes." },
+  { g: 3, t: "Oedema", a: "Excess fluid in body tissues causing swelling", d: ["Loss of fluid from the body", "Bruising under the skin", "Inflammation of a joint"], n: "Often seen in the ankles, legs or around the eyes. Pitting oedema leaves a dent when pressed." },
+  { g: 3, t: "Oliguria, anuria, polyuria", a: "Reduced urine output, no urine output, excessive urine output", d: ["Excessive urine, reduced urine, blood in urine", "Painful urination, frequent urination, no urination", "Blood, protein and sugar in urine"], n: "Urine output is a key sign of kidney function and hydration. Oliguria and anuria can point to dehydration or acute kidney injury." },
+  { g: 4, t: "Auscultation vs palpation", a: "Auscultation: listening, e.g. with a stethoscope. Palpation: feeling with the hands", d: ["Auscultation: feeling. Palpation: listening", "Auscultation: tapping. Palpation: looking", "Both mean measuring blood pressure"], n: "Other core techniques are inspection (looking) and percussion (tapping). Auscultation is used for heart, lung and bowel sounds." }
+];
+
+function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var x = a[i]; a[i] = a[j]; a[j] = x; } return a; }
+document.getElementById("n").textContent = T.length;
+
+/* Reference */
+(function () {
+  var html = "";
+  GROUPS.forEach(function (name, gi) {
+    var rows = T.filter(function (x) { return x.g === gi; });
+    html += '<div class="group"><h2>' + esc(name) + '</h2><dl style="margin:0">';
+    rows.forEach(function (x) {
+      html += '<div class="row"><dt>' + esc(x.t) + '</dt><dd><strong>' + esc(x.a) + '</strong><span>' + esc(x.n) + '</span></dd></div>';
+    });
+    html += '</dl></div>';
+  });
+  document.getElementById("groups").innerHTML = html;
+})();
+
+/* Flashcards */
+var deck = T.slice(), pos = 0, missed = {}, got = {};
+var $ = function (id) { return document.getElementById(id); };
+var card = $("card");
+function fcRender() {
+  var x = deck[pos];
+  card.classList.remove("flipped");
+  if (!x) { $("fc-term").textContent = "No cards here"; $("fc-ans").textContent = ""; $("fc-note").textContent = ""; $("fc-count").textContent = "0 cards"; return; }
+  $("fc-term").textContent = x.t; $("fc-ans").textContent = x.a; $("fc-note").textContent = x.n;
+  var g = Object.keys(got).length, m = Object.keys(missed).length;
+  $("fc-count").textContent = "Card " + (pos + 1) + " of " + deck.length + " · " + g + " got it · " + m + " to review";
+}
+function fcMove(d) { if (!deck.length) return; pos = (pos + d + deck.length) % deck.length; fcRender(); }
+card.addEventListener("click", function () { card.classList.toggle("flipped"); });
+$("fc-next").addEventListener("click", function () { fcMove(1); });
+$("fc-prev").addEventListener("click", function () { fcMove(-1); });
+$("fc-got").addEventListener("click", function () { var x = deck[pos]; if (!x) return; got[x.t] = 1; delete missed[x.t]; fcMove(1); });
+$("fc-again").addEventListener("click", function () { var x = deck[pos]; if (!x) return; missed[x.t] = 1; delete got[x.t]; fcMove(1); });
+$("fc-shuffle").addEventListener("click", function () { deck = shuffle(deck); pos = 0; fcRender(); });
+$("fc-review").addEventListener("click", function () {
+  var r = T.filter(function (x) { return missed[x.t]; });
+  deck = r.length ? r : T.slice(); pos = 0; fcRender();
+});
+$("fc-reset").addEventListener("click", function () { deck = T.slice(); pos = 0; missed = {}; got = {}; fcRender(); });
+document.addEventListener("keydown", function (e) {
+  if (location.hash !== "#flashcards") return;
+  if (e.key === "ArrowRight") fcMove(1);
+  else if (e.key === "ArrowLeft") fcMove(-1);
+  else if ((e.key === " ") && document.activeElement !== card) { e.preventDefault(); card.classList.toggle("flipped"); }
+});
+fcRender();
+
+/* Quiz */
+var qs = [], qi = 0, score = 0, wrongs = [], answered = false;
+function quizStart() { qs = shuffle(T); qi = 0; score = 0; wrongs = []; quizRender(); }
+function quizRender() {
+  var p = $("quiz-panel");
+  if (qi >= qs.length) {
+    var h = '<div class="eyebrow">Finished</div><p class="score">' + score + ' / ' + qs.length + '</p>';
+    if (wrongs.length) { h += '<div><strong>Revisit these</strong><ul class="missed">' + wrongs.map(function (w) { return "<li>" + esc(w) + "</li>"; }).join("") + "</ul></div>"; }
+    else { h += "<p>Every answer correct.</p>"; }
+    h += '<div class="btn-row"><button class="btn primary" id="again" type="button">Try again</button></div>';
+    p.innerHTML = h; $("again").addEventListener("click", quizStart); return;
+  }
+  var x = qs[qi]; answered = false;
+  var opts = shuffle([x.a].concat(x.d)), letters = ["A", "B", "C", "D"];
+  var h2 = '<div class="count">Question ' + (qi + 1) + " of " + qs.length + " · " + score + ' correct</div>' +
+    '<div class="bar"><i style="width:' + (qi / qs.length * 100) + '%"></i></div>' +
+    '<div class="eyebrow">What does this mean?</div><h2 class="q">' + esc(x.t) + '</h2><div class="opts">';
+  opts.forEach(function (o, i) { h2 += '<button class="opt" type="button" data-v="' + i + '"><span class="k">' + letters[i] + '</span><span>' + esc(o) + '</span></button>'; });
+  h2 += '</div><div id="fb"></div>';
+  p.innerHTML = h2;
+  var btns = p.querySelectorAll(".opt");
+  btns.forEach(function (b, i) {
+    b.addEventListener("click", function () {
+      if (answered) return; answered = true;
+      var ok = opts[i] === x.a;
+      if (ok) score++; else wrongs.push(x.t);
+      btns.forEach(function (bb, j) { bb.disabled = true; if (opts[j] === x.a) bb.classList.add("right"); });
+      if (!ok) b.classList.add("wrong");
+      $("fb").innerHTML = '<p class="explain"><strong>' + (ok ? "Correct." : "Not quite.") + "</strong> " + esc(x.n) + '</p>' +
+        '<div class="btn-row" style="margin-top:12px"><button class="btn primary" id="nx" type="button">' + (qi + 1 >= qs.length ? "See score" : "Next question") + '</button></div>';
+      $("nx").addEventListener("click", function () { qi++; quizRender(); });
+      $("nx").focus();
+    });
+  });
+}
+quizStart();
+
+var MOD = [
+{ name: "Test 1", qs: [
+["What is the main role of the nucleolus?",["Generating ATP","Making ribosomal RNA and assembling ribosome subunits","Digesting waste","Storing calcium"],1,"The nucleolus sits inside the nucleus and builds ribosome components."],
+["Which organelle contains digestive enzymes that break down worn-out cell parts and engulfed material?",["Lysosome","Ribosome","Golgi apparatus","Nucleus"],0,"Lysosomes are the cell's recycling and waste-disposal compartments."],
+["Which of the following is an X-linked recessive condition?",["Cystic fibrosis","Huntington's disease","Down syndrome","Duchenne muscular dystrophy"],3,"Duchenne muscular dystrophy, like haemophilia, is X-linked recessive and mainly affects males."],
+["A person with the genotype Hh (one dominant and one recessive allele) is described as:",["Homozygous dominant","Homozygous recessive","Heterozygous","Hemizygous"],2,"Heterozygous means two different alleles. Homozygous means two identical alleles."],
+["Which mechanism cools the body when sweat is produced?",["Conduction","Evaporation","Vasoconstriction","Shivering"],1,"Evaporation of sweat takes heat from the skin surface."],
+["Which valve prevents blood flowing back into the left ventricle from the aorta?",["Mitral valve","Tricuspid valve","Aortic valve","Pulmonary valve"],2,"The aortic valve is a semilunar valve at the exit of the left ventricle."],
+["A typical normal resting heart rate for an adult is:",["30 to 50 beats per minute","60 to 100 beats per minute","110 to 140 beats per minute","150 to 180 beats per minute"],1,"Rates outside this range can be normal in some people (for example athletes) but must be interpreted in context."],
+["After significant blood loss, which compensatory response is expected?",["Bradycardia","Tachycardia and peripheral vasoconstriction","Vasodilation of all vessels","Increased urine output"],1,"The body raises heart rate and constricts vessels to maintain blood pressure and perfusion of vital organs."],
+["How many lobes does the right lung have?",["Two","Three","Four","Five"],1,"The right lung has three lobes and the left has two, leaving room for the heart."],
+["Compared with adults, a healthy young child's normal respiratory rate is typically:",["Lower","The same","Higher","Irregular and absent"],2,"Children have higher metabolic rates and smaller lung volumes, so they breathe faster."],
+["The central nervous system consists of:",["Cranial and spinal nerves","The brain and spinal cord","The sympathetic chain only","All sensory neurons"],1,"Nerves outside the brain and spinal cord form the peripheral nervous system."],
+["A reflex action such as pulling the hand from a hot object is:",["Processed first by the cerebral cortex","Slow and always conscious","A rapid automatic response often processed at spinal cord level","Controlled by hormones only"],2,"The reflex arc bypasses conscious processing for speed. Pain is felt afterwards."],
+["Parathyroid hormone (PTH) does which of the following?",["Lowers blood glucose","Raises blood calcium levels","Lowers blood pressure","Raises blood sodium only"],1,"PTH increases calcium by acting on bone, kidney and (indirectly) the gut."],
+["Which organ produces the most important digestive enzymes for carbohydrate, protein and fat digestion?",["Gallbladder","Pancreas","Oesophagus","Spleen"],1,"The pancreas secretes amylase, proteases and lipase into the duodenum."],
+["The loop of Henle is mainly involved in:",["Filtering blood","Creating a concentration gradient that allows urine to be concentrated","Storing urine","Producing erythropoietin"],1,"It helps reabsorb water and salts and sets up the gradient used by ADH in the collecting duct."],
+["Follicle-stimulating hormone (FSH) in females:",["Stimulates ovarian follicle development","Triggers labour","Produces milk","Maintains the corpus luteum"],0,"FSH from the anterior pituitary stimulates follicle growth in the early part of the menstrual cycle."],
+["Where are blood cells produced in adults?",["Red bone marrow","Liver only","Cartilage","Tendons"],0,"Haematopoiesis occurs in red marrow in flat bones such as the pelvis, sternum and vertebrae."],
+["Histamine released during inflammation causes:",["Vasoconstriction and reduced swelling","Vasodilation and increased capillary permeability","Increased clotting","Decreased blood flow to the area"],1,"This brings immune cells and fluid to the site and causes redness, heat and swelling."],
+["Which route of administration gives the fastest onset of action?",["Oral","Topical","Intravenous","Transdermal patch"],2,"IV drugs enter the bloodstream directly with no absorption phase."],
+["Self-efficacy refers to:",["A person's belief in their ability to carry out a behaviour or achieve a goal","The severity of an illness","A reward for a behaviour","A person's genetic risk"],0,"Higher self-efficacy is associated with greater success in changing health behaviours."]
+]},
+{ name: "Test 2", qs: [
+["Which process does a cell use to take in large particles by engulfing them in a membrane vesicle?",["Exocytosis","Endocytosis","Osmosis","Diffusion"],1,"Endocytosis brings material in; exocytosis releases it."],
+["Which protein makes the outer layer of the skin tough and waterproof?",["Collagen","Keratin","Elastin","Melanin"],1,"Keratinocytes fill with keratin as they move to the surface of the epidermis."],
+["A condition appears in every generation and affects males and females equally. Which pattern is most likely?",["Autosomal recessive","X-linked recessive","Autosomal dominant","Chromosomal condition"],2,"Autosomal dominant conditions show vertical transmission with both sexes affected."],
+["Dehydration triggers release of which hormone from the posterior pituitary?",["Oxytocin","ADH (antidiuretic hormone)","Insulin","Cortisol"],1,"ADH increases water reabsorption in the collecting ducts."],
+["Blood clotting is an example of:",["Negative feedback","Positive feedback","No feedback","A change in set point"],1,"Activated platelets recruit more platelets, amplifying the response until the clot forms."],
+["Which is a typical sign of anaemia?",["Flushed skin and high blood pressure","Pallor, fatigue and breathlessness on exertion","Bradycardia and weight gain","Jaundice only"],1,"Reduced haemoglobin means less oxygen delivery to tissues."],
+["Which vitamin is needed to absorb calcium from the gut?",["Vitamin C","Vitamin K","Vitamin D","Vitamin A"],2,"Vitamin D, partly made in the skin, supports calcium absorption and bone health."],
+["Which helps return blood to the heart from the legs?",["Gravity alone","The skeletal muscle pump and one-way valves in veins","Aortic valve closure","The pulse in arteries"],1,"Venous pressure is low, so muscle contraction and valves keep blood moving upwards."],
+["Left-sided heart failure most characteristically causes:",["Pulmonary oedema and breathlessness","Leg swelling only","Jaundice","Polyuria"],0,"Blood backs up into the lungs. Right-sided failure causes peripheral oedema."],
+["Type 2 diabetes is mainly characterised by:",["Absent insulin from birth","Insulin resistance and reduced insulin effect","Excess thyroid hormone","Failure of glucagon release"],1,"Cells respond poorly to insulin, so glucose stays high in the blood."],
+["In pneumonia, gas exchange is impaired because alveoli fill with:",["Air","Fluid and inflammatory cells","Surfactant only","Blood clots only"],1,"Consolidation reduces the surface available for oxygen and carbon dioxide exchange."],
+["The resting membrane potential of a neuron is about:",["+70 mV","0 mV","-70 mV","-200 mV"],2,"The inside of the neuron is negative relative to the outside at rest."],
+["The hepatic portal vein carries blood from the gut to the:",["Heart","Liver","Kidney","Lungs"],1,"Nutrients absorbed in the gut pass through the liver before entering general circulation."],
+["Addison's disease results from too little:",["Cortisol (and often aldosterone)","Thyroxine","Insulin","Growth hormone"],0,"Adrenal cortex failure causes fatigue, low blood pressure and low sodium."],
+["The biopsychosocial model of health considers:",["Biological factors only","Biological, psychological and social factors together","Social class only","Genes only"],1,"It recognises that health is shaped by body, mind and circumstances together."],
+["In dehydration, urine is typically:",["Pale and dilute","Dark and concentrated","Unchanged","Blood-stained"],1,"ADH increases water reabsorption, leaving small volumes of concentrated urine."],
+["A rising serum creatinine suggests:",["Improving kidney function","Reduced kidney function","High blood glucose","Liver failure only"],1,"Creatinine is cleared by the kidneys, so it builds up when filtration falls."],
+["Oxytocin is involved in:",["Uterine contraction and milk ejection","Calcium regulation","Glucose uptake","Water retention"],0,"It is released from the posterior pituitary during labour and breastfeeding."],
+["Memory B cells formed after vaccination allow:",["A faster, stronger response on re-exposure","Passive immunity","No response to the pathogen","An allergic reaction every time"],0,"This is the basis of active, long-lasting immunity."],
+["Why do older adults often need lower doses of some drugs?",["They clear drugs faster","Reduced kidney and liver function slow drug clearance","They absorb drugs only through the skin","They have more body water"],1,"Slower clearance can cause drugs to accumulate and reach toxic levels."]
+]},
+{ name: "Test 3", qs: [
+["What is a main function of smooth endoplasmic reticulum?",["Protein synthesis","Lipid synthesis and detoxification","Storing DNA","Generating ATP"],1,"Smooth ER has no ribosomes. Rough ER makes proteins."],
+["An allele is:",["A section of a chromosome with no function","A type of chromosome","A different version of the same gene","A faulty gene only"],2,"For example, the blood group gene has A, B and O alleles."],
+["A man with haemophilia A (X-linked recessive) has children with a woman who is not a carrier. What is expected?",["All sons affected","Half of sons affected","All daughters affected","All daughters are carriers and no sons are affected"],3,"The father passes his X to all daughters (making them carriers) and his Y to sons, who cannot inherit the condition from him."],
+["Which receptors detect changes in blood pressure?",["Baroreceptors","Osmoreceptors","Photoreceptors","Nociceptors"],0,"Baroreceptors in the aortic arch and carotid sinuses signal the brainstem to adjust heart rate and vessel tone."],
+["Compared with an adult, a healthy newborn's resting heart rate is typically:",["Lower","Higher","The same","Absent at rest"],1,"Newborns have small stroke volumes, so they rely on a higher rate to maintain cardiac output."],
+["Which type of blood vessel has the thickest muscular wall?",["Veins","Capillaries","Arteries","Venules"],2,"Arteries carry blood at high pressure and have thick elastic and muscular walls."],
+["The first heart sound ('lub') is produced by:",["Closure of the mitral and tricuspid valves","Closure of the aortic and pulmonary valves","Blood entering the atria","Atrial contraction"],0,"It marks the start of ventricular systole."],
+["In a healthy person, the main chemical stimulus for breathing is:",["Oxygen levels in arterial blood","Nitrogen levels","Blood glucose","Carbon dioxide levels in blood"],3,"Chemoreceptors detect rising CO2 (through H+) and increase ventilation. Low oxygen is a secondary stimulus."],
+["During inspiration, pressure inside the lungs:",["Rises above atmospheric pressure","Falls below atmospheric pressure","Stays the same as atmospheric pressure","Is irrelevant to airflow"],1,"Air flows from higher pressure (atmosphere) to lower pressure (lungs)."],
+["Which part of a neuron receives incoming signals?",["Dendrites","Axon","Myelin sheath","Axon terminal"],0,"The axon carries impulses away from the cell body."],
+["Which gland produces melatonin?",["Thyroid","Adrenal gland","Pineal gland","Pancreas"],2,"Melatonin regulates the sleep-wake cycle and is released in darkness."],
+["Lipase digests:",["Protein into amino acids","Starch into glucose","DNA into nucleotides","Fats into fatty acids and glycerol"],3,"Lipase (mainly pancreatic) acts with bile, which emulsifies fat."],
+["The main function of the gallbladder is:",["Producing bile","Storing and concentrating bile","Producing insulin","Absorbing fat"],1,"Bile is made by the liver and stored in the gallbladder until needed."],
+["Where does blood filtration occur in the nephron?",["Loop of Henle","Collecting duct","Glomerulus","Bladder"],2,"The glomerulus is a ball of capillaries inside Bowman's capsule where plasma is filtered."],
+["Which hormone maintains the uterine lining in early pregnancy?",["Progesterone","FSH","Insulin","Thyroxine"],0,"Progesterone, first from the corpus luteum and later the placenta, maintains the endometrium."],
+["The shoulder is which type of joint?",["Hinge","Pivot","Fixed (fibrous)","Ball-and-socket"],3,"Ball-and-socket joints allow movement in many directions. The hip is also ball-and-socket."],
+["Sebum from the sebaceous glands functions to:",["Cool the body by evaporation","Lubricate and waterproof the skin and hair","Produce melanin","Carry sensation"],1,"Sebaceous glands usually open into hair follicles."],
+["Mast cells release which chemical in allergic reactions?",["Antibodies","Insulin","Histamine","Bile"],2,"Histamine causes vasodilation, increased permeability and itching."],
+["After three half-lives, approximately what proportion of a drug dose remains in the body?",["25%","12.5%","6.25%","50%"],1,"The amount halves each half-life: 50%, 25%, 12.5%."],
+["Social learning theory (Bandura) proposes that:",["People learn by observing and imitating others","Behaviour is determined only by genes","Learning only occurs through punishment","Learning only occurs in childhood"],0,"Role models strongly influence health behaviours."]
+]},
+{ name: "Test 4", qs: [
+["Free ribosomes in the cytoplasm mainly make proteins that:",["Are exported from the cell","Are used within the cell","Form DNA","Are stored as fat"],1,"Ribosomes attached to rough ER make proteins for export or for the membrane."],
+["A cell placed in an isotonic solution will:",["Swell and burst","Shrink","Show no net water movement","Divide"],2,"Solute concentrations are equal inside and outside, so water moves equally in both directions."],
+["A karyotype showing 47 chromosomes with an extra chromosome 21 indicates:",["Turner syndrome","Down syndrome","Haemophilia A","Sickle cell disease"],1,"Trisomy 21 causes Down syndrome."],
+["One parent has Huntington's disease (heterozygous). What is the chance a child inherits it?",["25%","50%","75%","100%"],1,"Autosomal dominant: each child has a 50% chance of inheriting the altered allele."],
+["The 'set point' in homeostasis is:",["The target value a variable is held near","An effector organ","A hormone","The sensor"],0,"Control systems compare the actual value with the set point and correct differences."],
+["When blood pressure rises, baroreceptor reflexes cause:",["Vasoconstriction and faster heart rate","Vasodilation and slower heart rate","No change","Increased adrenaline release"],1,"This negative feedback lowers blood pressure back towards normal."],
+["A myocardial infarction is usually caused by:",["A blocked coronary artery","A blocked pulmonary vein","A burst aorta","Valve closure"],0,"Heart muscle supplied by the blocked artery is starved of oxygen."],
+["Which chamber receives deoxygenated blood from the body via the vena cava?",["Left atrium","Right atrium","Left ventricle","Right ventricle"],1,"The right atrium passes blood to the right ventricle, then to the lungs."],
+["Which structure covers the opening of the trachea during swallowing?",["Uvula","Epiglottis","Larynx","Pharynx"],1,"The epiglottis helps stop food entering the airway."],
+["Most carbon dioxide is transported in the blood as:",["Bound to haemoglobin","Dissolved gas only","Bicarbonate ions","Carbonic acid crystals"],2,"CO2 reacts with water to form carbonic acid, which dissociates into bicarbonate and hydrogen ions."],
+["Which lobe contains Broca's area, important for speech production?",["Occipital","Temporal","Parietal","Frontal"],3,"Damage to Broca's area causes difficulty producing fluent speech."],
+["A stroke damaging the right cerebral hemisphere typically causes weakness on the:",["Right side","Left side","Both sides equally","Face only"],1,"Motor pathways cross over (decussate), so each hemisphere controls the opposite side."],
+["Which is a typical feature of hyperthyroidism?",["Weight gain and cold intolerance","Weight loss, tremor and heat intolerance","Slow heart rate","Dry skin and lethargy"],1,"Excess thyroid hormone speeds up metabolism."],
+["The first part of the small intestine, which receives bile and pancreatic juice, is the:",["Ileum","Jejunum","Duodenum","Caecum"],2,"The duodenum is followed by the jejunum and ileum."],
+["Dangerously high blood potassium (hyperkalaemia) mainly threatens the:",["Heart rhythm","Hearing","Hair","Bone density"],0,"High potassium can cause life-threatening arrhythmias."],
+["After ovulation, the corpus luteum secretes mainly:",["LH","Progesterone","Insulin","FSH"],1,"Progesterone prepares and maintains the uterine lining."],
+["Osteoporosis is characterised by:",["Increased bone density","Reduced bone density and increased fracture risk","Inflamed joints only","Muscle wasting only"],1,"Bone resorption outpaces formation, weakening bone."],
+["Cytotoxic T cells:",["Make antibodies","Kill virus-infected cells","Release histamine","Carry oxygen"],1,"They recognise infected cells and destroy them directly."],
+["Polypharmacy in older adults mainly increases the risk of:",["Adverse reactions and drug interactions","Faster healing","Lower drug cost","Higher bioavailability"],0,"More medicines mean more chances of interactions and side effects."],
+["Someone with an external locus of control believes their health is mainly determined by:",["Their own actions","Luck, fate or other people","Genes only","Medication only"],1,"An internal locus of control means believing outcomes depend on your own actions."]
+]},
+{ name: "Test 5", qs: [
+["Oxygen and carbon dioxide cross the cell membrane mainly by:",["Active transport","Simple diffusion","Endocytosis","Exocytosis"],1,"Small non-polar molecules pass through the lipid bilayer down their concentration gradients."],
+["Cells in a hypertonic solution will:",["Swell","Burst","Shrink as water leaves","Stay the same size"],2,"Water moves out of the cell towards the higher solute concentration."],
+["A carrier of an autosomal recessive condition:",["Has two faulty alleles and symptoms","Has one faulty allele and usually no symptoms","Has no faulty alleles","Always passes the condition on"],1,"Carriers have one normal and one altered allele."],
+["Hypothermia is generally defined as a core temperature below:",["37 °C","36 °C","35 °C","32 °C"],2,"Below 35 °C the body's heat loss exceeds production."],
+["How does a fever differ from hyperthermia?",["Fever raises the hypothalamic set point, while hyperthermia is heat gain exceeding heat loss","They are the same thing","Fever only occurs in children","Hyperthermia lowers the set point"],0,"Antipyretics work on fever but not on hyperthermia, which needs active cooling."],
+["Diastolic blood pressure reflects the pressure when the:",["Ventricles contract","Ventricles relax","Atria contract","Aortic valve opens"],1,"Systolic is the peak pressure during ventricular contraction."],
+["An 'irregularly irregular' pulse suggests:",["Sinus rhythm","Atrial fibrillation","Complete heart block only","Normal ageing"],1,"Atrial fibrillation increases the risk of stroke."],
+["Peripheral oedema and raised jugular venous pressure suggest:",["Left heart failure","Right heart failure","Asthma","Anaemia"],1,"Blood backs up in the systemic venous system."],
+["A pulmonary embolism is:",["A lung infection","Blockage of a pulmonary artery, usually by a clot","A collapsed lung","Airway narrowing"],1,"It impairs blood flow through the lungs and can cause sudden breathlessness."],
+["In pulmonary fibrosis, the lungs become:",["More compliant","Stiffer and less compliant","Filled with air","Larger"],1,"Scarring makes the lungs harder to inflate."],
+["Which glial cells form myelin in the central nervous system?",["Schwann cells","Oligodendrocytes","Astrocytes","Microglia"],1,"Schwann cells myelinate peripheral nerves."],
+["Growth hormone is released from the:",["Posterior pituitary","Anterior pituitary","Thyroid","Pancreas"],1,"The anterior pituitary also releases TSH, ACTH, FSH, LH and prolactin."],
+["Which stomach cells secrete hydrochloric acid?",["Chief cells","Parietal cells","Goblet cells","Mast cells"],1,"Chief cells secrete pepsinogen."],
+["Hepatitis is:",["Inflammation of the liver","Inflammation of the pancreas","Kidney stones","Cancer of the gallbladder"],0,"Common causes include viruses, alcohol and drugs."],
+["Urinary tract infections are more common in females partly because:",["The urethra is shorter","The urethra is longer","The bladder is larger","Urine is more acidic"],0,"Bacteria have a shorter distance to travel to the bladder."],
+["Puberty is initiated by increased release of which hypothalamic hormone?",["GnRH","ADH","TRH","CRH"],0,"GnRH stimulates the pituitary to release FSH and LH."],
+["How does the epidermis receive nutrients?",["Through its own blood vessels","By diffusion from capillaries in the dermis","Through sweat glands","Through hair follicles"],1,"The epidermis has no blood vessels."],
+["Innate immunity is:",["Slow and highly specific","Immediate and non-specific","Only present after vaccination","Made up of antibodies only"],1,"Examples include skin, mucus, neutrophils and inflammation."],
+["A generic medicine differs from the branded version in that it has:",["A different active ingredient","The same active ingredient","No active ingredient","Always more side effects"],1,"Generics contain the same active ingredient and are usually cheaper."],
+["Motivational interviewing aims to:",["Instruct the person what to do","Strengthen the person's own motivation to change","Punish unhealthy behaviour","Make a diagnosis"],1,"It is a collaborative, non-judgemental approach that explores ambivalence."]
+]},
+{ name: "Pathogens", qs: [
+["What is a pathogen?", ["Any infectious agent that causes disease", "Any microorganism living in the gut", "Any cell that lacks a nucleus", "Any substance that causes an allergy"], 0, "The lecture defines a pathogen as any infectious agent that causes disease."],
+["Which description fits prokaryotes?", ["A true nucleus and membrane-enclosed organelles", "No nucleus and no membrane-enclosed organelles", "Includes animals, plants and fungi", "Always cause disease"], 1, "Prokaryotes, which include bacteria, are small and simple. Eukaryotes have a true nucleus and include animals, plants and fungi."],
+["Which pathogens are acellular, meaning non-living?", ["Bacteria and fungi", "Protozoa and parasitic worms", "Viruses and prions", "Fungi and protozoa"], 2, "Viruses and prions are acellular. Bacteria, fungi, protozoa and parasitic worms are cellular."],
+["Roughly what proportion of bacterial species are pathogenic?", ["1 to 5%", "20 to 30%", "50%", "Over 75%"], 0, "Only a small minority of bacteria cause disease, and many are part of the human microbiome."],
+["Which is a benefit of bacteria in the human microbiome?", ["They produce vitamins such as B and K", "They destroy all other microbes", "They replace the immune system", "They prevent the need for food"], 0, "Microbiome bacteria also help digest food and release nutrients, and protect against infection."],
+["What is the role of the pilus on a bacterium?", ["Making proteins", "Storing DNA", "Attachment to host cells", "Maintaining shape"], 2, "Pili help bacteria attach to host cells. The flagellum gives motility."],
+["How does a bacterial capsule help the bacterium?", ["It protects it from phagocytosis", "It makes ATP", "It copies DNA", "It digests food"], 0, "The capsule makes it harder for phagocytes to engulf the bacterium."],
+["More than half of global bacterial deaths in 2019 came from five bacterial pathogens. Which of these is NOT one of them?", ["Staphylococcus aureus", "Escherichia coli", "Giardia lamblia", "Pseudomonas aeruginosa"], 2, "Giardia lamblia is a protozoan. The five bacteria were S. aureus, E. coli, S. pneumoniae, K. pneumoniae and P. aeruginosa."],
+["Which statement about sepsis in the UK matches the lecture?", ["It kills fewer people than breast cancer", "It causes around 48,000 deaths per year", "It only affects hospital staff", "It is always caused by viruses"], 1, "The lecture quotes about 250,000 admissions and 48,000 deaths per year, more than breast, bowel and prostate cancer combined."],
+["What is a biofilm?", ["A single bacterium floating in blood", "A cluster of microorganisms attached to a surface or each other in a self-produced matrix", "A type of antibiotic", "A layer of skin cells"], 1, "The matrix protects the microorganisms, for example from the immune system or antibiotics."],
+["Why are biofilms on catheters and sutures a clinical problem?", ["They make infections persistent, recurrent and harder to treat", "They boost immunity", "They dissolve the device", "They only affect children"], 0, "Biofilms on medical implants shield microbes from immune defences and antibiotics."],
+["How can E. coli invading bladder cells lead to recurrent infection?", ["It kills all bladder cells at once", "It hides from the immune system inside host cells", "It turns into a virus", "It stops producing proteins"], 1, "Hiding inside cells lets bacteria escape immune defences, which can lead to recurrent or chronic infections."],
+["What are virulence factors?", ["Vitamins made by gut bacteria", "Specific molecules or structures that help a bacterium cause disease", "Antibodies made by B cells", "Drugs used to treat infection"], 1, "They can aid attachment, evade the immune system, damage host cells or acquire nutrients."],
+["E. coli spreading from the bladder up to the kidneys causes:", ["Pyelonephritis", "Hepatitis", "Pneumonia", "Meningitis"], 0, "This is an example of dissemination beyond the initial site of infection."],
+["Sepsis is best described as:", ["A mild skin infection", "Life-threatening organ dysfunction caused by an abnormal host response to infection", "An allergic reaction", "A type of fungus"], 1, "Sepsis is a medical emergency in which the body's response to infection damages its own organs."],
+["Which statement about viruses is correct?", ["They have their own metabolism", "They respond to antibiotics", "They have no metabolism and are not cells", "They are prokaryotes"], 2, "A virus is genetic material (DNA or RNA) in a protein coat (capsid). Antibiotics are ineffective against viruses."],
+["How do viruses make new viral particles?", ["By dividing like bacteria", "By using the host cell's machinery", "By photosynthesis", "By feeding on dead tissue"], 1, "Viruses cannot reproduce independently, so they must infect living cells."],
+["Opportunistic fungal infections are more likely when:", ["Host defences are weakened, for example by immunosuppression or diabetes", "The person has just been vaccinated", "The person is eating more vitamins", "The skin is dry"], 0, "Broad-spectrum antibiotic treatment can also make fungal infections more likely."],
+["Which is an example of vector-borne transmission of a protozoan?", ["Plasmodium spread by mosquitoes", "Giardia spread by coughing", "Candida spread by air", "Prions spread by sutures"], 0, "Plasmodium (malaria) is spread by mosquito bites. Trypanosoma is spread by tsetse flies."],
+["What does 'zoonosis' mean?", ["A disease passed from animals to humans", "A disease only found in zoos", "A disease caused by fungi", "A vaccine-preventable disease"], 0, "About 75% of newly emerging infectious diseases are zoonoses."]
+]},
+{ name: "Immune system", qs: [
+["What does immune tolerance mean?", ["Attacking all foreign material", "Normally limiting responses against healthy tissues and harmless substances", "Producing more antibodies over time", "Ignoring all infections"], 1, "When tolerance fails, autoimmune disease can develop."],
+["Most cells display MHC class I proteins. What do they do?", ["Present fragments of proteins to immune cells", "Digest bacteria", "Release histamine", "Produce antibodies"], 0, "MHC I lets immune cells see what is going on inside a cell."],
+["Which of these is an example of an autoimmune disease named in the lecture?", ["Sepsis", "Rheumatoid arthritis", "Athlete's foot", "Malaria"], 1, "Type 1 diabetes, rheumatoid arthritis and multiple sclerosis were the examples given."],
+["Flagellin, the protein in bacterial flagella, is an example of a:", ["DAMP", "PAMP", "Antibody", "Cytokine"], 1, "PAMPs are pathogen-associated molecular patterns found on many microbes, for example flagellin in both Salmonella and E. coli."],
+["DAMPs (damage-associated molecular patterns) signal that:", ["A cell has been stressed or injured", "A vaccine has worked", "A bacterium has a flagellum", "An antibody has formed"], 0, "They are molecules released or exposed during cell stress and injury."],
+["Which of these is NOT one of the three main actions of neutrophils?", ["Degranulation", "Phagocytosis", "NETosis", "Producing antibodies"], 3, "Antibodies are made by plasma cells, which come from B cells."],
+["What do NETs stand for?", ["Natural Effector Tissues", "Neutrophil Extracellular Traps", "Nonspecific Enzyme Toxins", "Nuclear Envelope Targets"], 1, "NETosis releases web-like traps that catch microbes."],
+["Which statement describes macrophages?", ["They produce antibodies", "They are tissue phagocytes that ingest microbes and debris and can present antigen to T cells", "They are less than 1% of white blood cells", "They mainly target parasitic worms"], 1, "Macrophages also release signalling molecules and help tissue repair."],
+["Where are mast cells mainly found?", ["In tissues near surfaces exposed to the environment", "Only in the bone marrow", "Only in the blood", "Inside red blood cells"], 0, "They release histamine and other mediators and contribute to defence and allergic reactions."],
+["What is a key role of dendritic cells?", ["Sampling antigens and migrating to lymph nodes to activate naive T cells", "Making antibodies", "Killing parasitic worms", "Carrying oxygen"], 0, "Dendritic cells link innate and adaptive immunity."],
+["Basophils make up approximately what share of circulating white blood cells?", ["Less than 1%", "10%", "30%", "60%"], 0, "Their granules contain heparin, histamine and serotonin."],
+["Eosinophils are especially important in targeting:", ["Viruses", "Large pathogens such as parasitic worms", "Prions", "Single bacteria only"], 1, "They are also involved in allergic reactions and chronic inflammation, for example asthma and eczema."],
+["Why can reduced MHC I expression make a cell a target for natural killer cells?", ["It removes inhibitory signalling", "It makes the cell larger", "It produces antibodies", "It stops all activation signals"], 0, "NK cells respond to the balance of activating and inhibitory signals."],
+["What is an antigen?", ["A molecule or structure recognised by the adaptive immune system", "A type of white blood cell", "A hormone", "An antibiotic"], 0, "Antigens are often proteins on pathogens but can also come from harmless substances or the body's own tissues."],
+["B cells differentiate into which two cell types?", ["Neutrophils and macrophages", "Plasma cells and memory B cells", "Mast cells and basophils", "Helper and cytotoxic T cells"], 1, "Plasma cells secrete antibodies. Memory B cells support immune memory."],
+["Which statement about antibodies is correct?", ["Each antibody is specific to one particular antigen", "They are made by neutrophils", "They are only found in the skin", "They kill cells directly by phagocytosis"], 0, "Antibodies are proteins made by plasma cells and found in blood, lymph and body fluids."],
+["What do cytotoxic T cells do?", ["Identify and destroy cancer cells and virally infected cells", "Release histamine", "Produce antibodies", "Engulf debris only"], 0, "Helper T cells, in contrast, coordinate the response."],
+["What is the role of helper T cells?", ["Coordinating the immune response by activating B cells, cytotoxic T cells and macrophages", "Destroying worms", "Storing calcium", "Carrying oxygen"], 0, "They also secrete inflammatory mediators to regulate immune activity."],
+["Memory T cells provide long-term immunity by:", ["Quickly recognising previously encountered pathogens", "Producing histamine", "Killing all bacteria on contact", "Replacing neutrophils"], 0, "This is why a second exposure to a pathogen produces a faster response."],
+["Which of these belongs to the adaptive immune system?", ["Neutrophil", "Mast cell", "B cell", "Eosinophil"], 2, "Neutrophils, mast cells and eosinophils are innate. B and T cells are adaptive."]
+]}
+];
+var mtState = MOD.map(function (t) { return t.qs.map(function () { return -1; }); });
+var mtCur = 0, LET = ["A", "B", "C", "D"];
+function mk(tag, cls, txt) { var e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
+function mtCounts(i) {
+  var done = 0, right = 0;
+  mtState[i].forEach(function (a, j) { if (a >= 0) { done++; if (a === MOD[i].qs[j][2]) right++; } });
+  return { done: done, right: right, total: MOD[i].qs.length };
+}
+function mtRender() {
+  var y = window.scrollY;
+  var tabs = $("mt-tabs"); tabs.innerHTML = "";
+  MOD.forEach(function (t, i) {
+    var c = mtCounts(i), b = mk("button", "mt-tab"); b.type = "button";
+    b.setAttribute("aria-pressed", i === mtCur ? "true" : "false");
+    b.appendChild(mk("b", "", t.name)); b.appendChild(mk("span", "", c.right + "/" + c.done + " of " + c.total));
+    b.addEventListener("click", function () { mtCur = i; mtRender(); window.scrollTo(0, 0); });
+    tabs.appendChild(b);
+  });
+  var c = mtCounts(mtCur), pct = c.done ? Math.round(100 * c.right / c.done) : 0;
+  var sc = $("mt-score"); sc.textContent = c.right + " / " + c.done + " correct";
+  sc.appendChild(mk("small", "", c.done + " of " + c.total + " answered" + (c.done ? " · " + pct + "%" : "")));
+  $("mt-fill").style.width = (100 * c.right / c.total) + "%";
+  var list = $("mt-list"); list.innerHTML = "";
+  MOD[mtCur].qs.forEach(function (q, qi) {
+    var picked = mtState[mtCur][qi], card = mk("article", "mt-q");
+    card.appendChild(mk("div", "mt-qn", "QUESTION " + (qi + 1) + " OF " + MOD[mtCur].qs.length));
+    card.appendChild(mk("p", "mt-qp", q[0]));
+    var box = mk("div", "opts");
+    q[1].forEach(function (text, oi) {
+      var b = mk("button", "opt"); b.type = "button";
+      b.appendChild(mk("span", "k", LET[oi])); b.appendChild(mk("span", "", text));
+      if (picked >= 0) {
+        b.disabled = true;
+        if (oi === q[2]) b.classList.add("right"); else if (oi === picked) b.classList.add("wrong");
+      } else {
+        b.addEventListener("click", function () { mtState[mtCur][qi] = oi; mtRender(); });
+      }
+      box.appendChild(b);
+    });
+    card.appendChild(box);
+    if (picked >= 0) {
+      var p = mk("p", "explain"), ok = picked === q[2];
+      p.appendChild(mk("strong", "", ok ? "Correct. " : "Correct answer: " + LET[q[2]] + ". "));
+      p.appendChild(document.createTextNode(q[3]));
+      card.appendChild(p);
+    }
+    list.appendChild(card);
+  });
+  var r = $("mt-result"); r.innerHTML = "";
+  if (c.done === c.total) {
+    var pc = Math.round(100 * c.right / c.total), panel = mk("div", "panel mt-res");
+    panel.appendChild(mk("h2", "q", MOD[mtCur].name + ": " + c.right + " out of " + c.total + " (" + pc + "%)"));
+    panel.appendChild(mk("p", "", pc >= 40 ? "Above the 40% pass mark." : "Below the 40% pass mark. Review the explanations, then reset and try again."));
+    r.appendChild(panel);
+  }
+  window.scrollTo(0, y);
+}
+$("mt-reset").addEventListener("click", function () {
+  mtState[mtCur] = MOD[mtCur].qs.map(function () { return -1; });
+  mtRender(); window.scrollTo(0, 0);
+});
+mtRender();
+
+/* Tabs */
+var TABS = ["reference", "flashcards", "quiz", "tests"];
+function showTab() {
+  var h = (location.hash || "#reference").slice(1);
+  if (TABS.indexOf(h) < 0) h = "reference";
+  TABS.forEach(function (id) { $(id).hidden = id !== h; });
+  document.querySelectorAll("nav a").forEach(function (a) {
+    if (a.dataset.tab === h) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
+  });
+}
+window.addEventListener("hashchange", showTab);
+showTab();
+</script>
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function () { navigator.serviceWorker.register("sw.js").catch(function () {}); });
+}
+</script>
+</body>
+</html>
